@@ -23,6 +23,7 @@ module counter(clk, rst, a);
 	input clk, rst;
 	// Example Verilog code for the counter 
 	output reg [3:0] a; 
+  
 	always @ (posedge clk) begin
 	  if (rst) 
 		a <= 4'b0000; 
