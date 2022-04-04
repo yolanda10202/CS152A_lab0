@@ -6,10 +6,13 @@ module counter_TB();
   
   counter m_counter(.clk(clk), .rst(rst), .a(result));
   
-  intial begin
-    clk = 1b'0;
-    rst = 1b'0;
-    result = 4'b0000;
+  initial begin
+    clk = 1'b0;
+    rst = 1'b0;
+    // result = 4'b0000;
+    #5 rst = 1;
+    #5 rst = 0;
+    
   end
   
   always begin
@@ -18,4 +21,4 @@ module counter_TB();
       clk <= ~clk;
     end
   end
-end
+endmodule
