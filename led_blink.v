@@ -3,9 +3,9 @@
 // Company: 
 // Engineer: 
 // 
-// Create Date:    10:16:50 04/06/2022 
+// Create Date:    12:04:20 04/06/2022 
 // Design Name: 
-// Module Name:    led_blink
+// Module Name:    led_blink 
 // Project Name: 
 // Target Devices: 
 // Tool versions: 
@@ -18,18 +18,22 @@
 // Additional Comments: 
 //
 //////////////////////////////////////////////////////////////////////////////////
-module led_blink(clk);
+module led_blink(clk, Led);
 	input clk;
 	// Example Verilog code for the counter 
-	output a; 
-	wire one_hz_clk;
-  
-	//To Do: Create and/or instantiate a 1 Hz clock divider
-	clk_div #(.count_from(0), .count_to(1000000000))
-		my_clockDiv(.in(clk), .out(one_hz_clk));
+	output reg [7:0] Led; 
+	reg [31:0] counter;
 	
-	always @ (posedge clk) begin
-	  a = ~a;
+	initial begin
+	  Led = 7'b0000000;
+	  counter = 32'b00000000000000000000000000000000;
 	end
 	
+	always @ (posedge clk) begin
+	  counter <= counter + 32'b00000000000000000000000000000001;
+	  if (counter == 32'b0000000000000000000000000100000) begin
+		Led[0] <= ~Led[0];
+		counter <= 32'b00000000000000000000000000000000;
+	  end
+	end
 endmodule
