@@ -22,7 +22,12 @@ module led_blink(clk);
 	input clk;
 	// Example Verilog code for the counter 
 	output a; 
+	wire one_hz_clk;
   
+	//To Do: Create and/or instantiate a 1 Hz clock divider
+	clk_div #(.count_from(0), .count_to(0))
+		my_clockDiv(.in(clk), .out(one_hz_clk));
+	
 	always @ (posedge clk) begin
 	  a = ~a;
 	end
